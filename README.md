@@ -5,3 +5,8 @@ Copy SWV_print.c into Core\src
 Copy SWV_print.h into Core\inc
 example_main.c shows where to place the include file SWV_print.h
 main() shows example usage
+
+
+HUART1 extern added - may need to change to HUART2
+debug_uart_printf() implemented for transmission to TT
+

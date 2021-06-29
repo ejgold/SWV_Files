@@ -12,6 +12,9 @@
 
 #include <SWV_print.h>
 
+extern UART_HandleTypeDef huart1;
+
+
 /*
 debug_printf sends a max of 256 characters to the ITM SWO trace debugger.
 It uses a _variable length argument_, same as normal printf.
@@ -39,4 +42,29 @@ void debug_printf(const char *fmt, ...) {
       i++;
     }
 }
+
+
+
+void debug_uart_printf(const char *fmt, ...) {
+    char buffer[256] = {0};
+    uint8_t* ptr;
+    va_list args;
+    va_start(args, fmt);
+    vsnprintf(buffer, sizeof(buffer), fmt, args);
+    va_end(args);
+
+    uint16_t i = 0;
+    while(buffer[i] != '\0')
+    {
+    	ptr = (uint8_t*)&buffer[i];
+      //ITM_SendChar(buffer[i]);
+  	  HAL_UART_Transmit(&huart1, ptr, 1, 1000); //1 is the number of characters, 1000 milliseconds timeout
+
+      i++;
+    }
+}
+
+
+
+
 

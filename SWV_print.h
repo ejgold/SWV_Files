@@ -16,6 +16,7 @@
 #include <stm32f4xx.h>
 
 void debug_printf(const char *fmt, ...);
+void debug_uart_printf(const char *fmt, ...);
 
 
 #endif /* INC_SWV_PRINT_H_ */
